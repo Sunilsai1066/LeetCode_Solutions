@@ -1,3 +1,24 @@
+# Memoization
+class Solution:
+    def helper(self, i, j, nums):
+        if i == j:
+            return 0
+        res = float("inf")
+        for k in range(i, j):
+            subres = (nums[k] * nums[i - 1] * nums[j]) + self.helper(i, k, nums) + self.helper(k + 1, j, nums)
+            res = min(res, subres)
+        return res
+
+    def matrixMultiplication(self, nums):
+        return self.helper(1, len(nums) - 1, nums)
+
+
+solution = Solution()
+print(solution.matrixMultiplication([1, 2, 3, 4]) == 18)
+
+
+# Tabulation
+
 from typing import List
 
 
